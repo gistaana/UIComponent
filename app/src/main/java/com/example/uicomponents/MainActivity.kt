@@ -1,5 +1,6 @@
 package com.example.uicomponents
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -26,7 +27,14 @@ class MainActivity : AppCompatActivity() {
             R.id.action_take_picture -> Toast.makeText(this, "you clicked the take picture option", Toast.LENGTH_SHORT).show()
             R.id.action_help -> startActivity(Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://temple.edu")))
             R.id.action_delete_picture -> {
-
+                AlertDialog.Builder(this)
+                    .setTitle("Delete confirmation")
+                    .setMessage("Are you sure you want to delete this picture?")
+                    .setPositiveButton("Yes") {_,_ -> Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show()}
+                    .setNegativeButton("No") {dialog,_ -> dialog.cancel()}
+                    .setCancelable(false)
+                    .create()
+                    .show()
             }
         }
 
